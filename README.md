@@ -3,3 +3,5 @@
 With python3's [htag](https://github.com/manatlan/htag) module.
 
 Android's Apk built thru the [htagapk recipe](https://github.com/manatlan/htagapk)
+
+<img src="app/triapp.png" width="100" height="100">
