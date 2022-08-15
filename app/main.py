@@ -2,7 +2,7 @@
 
 import htbulma as b
 from htag import Tag
-import math,os,json
+import math,os,json,sys
 
 # the folder, where app/apk can save data (parent folder)
 FOLDER=os.path.join( os.path.dirname(os.path.abspath(os.path.realpath(sys.argv[0]))), ".." )
@@ -331,7 +331,7 @@ class Selector(Tag.div):
 
 
 class App(Tag.body):
-    
+
     def init(self):
         self.cfg=Conf( os.path.join(FOLDER,"triapp.conf") )
 
@@ -396,23 +396,23 @@ class App(Tag.body):
             #---------------------------------------------------------------------
             totalSum=sum([expense.price for expense in self.db.expenses()])
             if totalSum>0:
-                ll=[Tag.div("Sur la totalité des dépenses : "+TagPrice(totalSum))]
+                ll=[Tag.div("Out of the total : "+TagPrice(totalSum))]
                 totalParts= sum([payer.part for payer in self.db.payers()])
                 for payer in self.db.payers():
                     percent = (100/totalParts) * payer.part
                     partage = (totalSum/totalParts) * payer.part
                     somme = sum([expense.price for expense in payer.expenses()])
                     if somme:
-                        txt= ", mais a deja payé "+ TagPrice(somme)
+                        txt= ", but has already paid "+ TagPrice(somme)
                     else:
-                        txt=", il n'a rien payé"
+                        txt=", paid nothing"
 
                     balance = partage - somme
                     if balance<0:
-                        txt += " : il doit donc récupérer "+TagPrice( abs(balance) )
+                        txt += " : he must therefore recover "+TagPrice( abs(balance) )
                     else:
-                        txt += " : il doit donc payer "+TagPrice( abs(balance) )
-                    ll.append( Tag.div( TagPayer(payer) + f" devrait ({percent:.2f}%), soit " + TagPrice(partage) + txt ) )
+                        txt += " : so he has to pay "+TagPrice( abs(balance) )
+                    ll.append( Tag.div( TagPayer(payer) + " should "+TagPrice(partage)+f"({percent:.2f}%)" + txt ) )
 
                 content=b.Box()
                 content+=Tag.h1("How to close:")
@@ -522,7 +522,7 @@ class App(Tag.body):
 if __name__=="__main__":
 
     # from htag.runners import *
-    
+
     # DevApp( App ).run()
     # GuyApp( App ).run()
     # PyWebWiew( App ).run()
