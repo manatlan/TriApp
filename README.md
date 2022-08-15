@@ -21,4 +21,4 @@ Build the APK using "Actions > Build Apk > Run workflow", the package.zip(apk) i
 
 ## Download
 
-[The APK](https://github.com/manatlan/TriApp/suites/7815955364/artifacts/330111894) (in the zipfile)
+[The APK](https://github.com/manatlan/TriApp/suites/7815955364/artifacts/330111894) (in the zipfile (13.5Mo))
