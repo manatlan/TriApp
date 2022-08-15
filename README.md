@@ -17,6 +17,6 @@ Build the APK using "Actions > Build Apk > Run workflow", the package.zip(apk) i
  
 ## Screenshots
 
-<img src="app/shot1.jpg" width="100" >
-<img src="app/shot2.jpg" width="100" >
-<img src="app/shot3.jpg" width="100" >
+<img src="shot1.jpg" width="100" >
+<img src="shot2.jpg" width="100" >
+<img src="shot3.jpg" width="100" >
