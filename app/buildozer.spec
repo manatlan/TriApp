@@ -1,17 +1,17 @@
 [app]
 
-title = Test htag App
-package.name = testhtagapk
-package.domain = org.test
+title = TriApp
+package.name = triapp
+package.domain = org.manatlan
 
 source.dir = .
 source.include_exts = py,png,jpg
 
 # (str) Presplash of the application
-presplash.filename = %(source.dir)s/htag.png
+presplash.filename = %(source.dir)s/triapp.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/htag.png
+icon.filename = %(source.dir)s/triapp.png
 
 version = 0.1
 requirements = python3,kivy,tornado,htbulma,htag,tinydb
