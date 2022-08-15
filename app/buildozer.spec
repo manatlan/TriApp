@@ -14,7 +14,7 @@ presplash.filename = %(source.dir)s/htag.png
 icon.filename = %(source.dir)s/htag.png
 
 version = 0.1
-requirements = python3,kivy,tornado,htbulma,htag
+requirements = python3,kivy,tornado,htbulma,htag,tinydb
 
 orientation = portrait
 fullscreen = 0
