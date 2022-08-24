@@ -178,29 +178,29 @@ class Fab(Tag.div):
 .is-circular { border-radius: 50%;padding:13px !important;}
     """
 
-    def __init__(self,callback,icon="✚"):
+    def __init__(self,callback,icon="✚",**a):
         super().__init__(_class="is-fab")
         self <= Tag.H.span(_class="icon is-large") <= Tag.b(icon, _onclick=callback, _class="button is-circular is-info is-link")
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 
 
 class TagDate(Tag.span):
-    def init(self,date):
+    def init(self,date,**a):
         self += date.strftime("%Y/%m/%d %H:%M")
 
 class TagPrice(Tag.span):
-    def init(self,price):
+    def init(self,price,**a):
         self["style"]="font-weight:900"
         self += f"{price:.2f}".replace(".",",")
 
 class TagPayer(Tag.span):
-    def init(self,payer: Payer):
+    def init(self,payer: Payer,**a):
         self["class"]="tag"
         self["style"]="background:"+payer.color+";color: "+highcolor(payer.color);
         self += payer.name
 
 class TagPart(Tag.span):
-    def init(self,payer: Payer,cb):
+    def init(self,payer: Payer,cb,**a):
         self.item = payer
         self.value = payer.part
         self.cb=cb
@@ -217,7 +217,7 @@ class TagPart(Tag.span):
 
 
 class ListExpenses(Tag.div):
-    def init(self,db,cbedit):
+    def init(self,db,cbedit,**a):
         totalSum=0
 
         ll=[]
@@ -235,7 +235,7 @@ class ListExpenses(Tag.div):
 
 
 class ListPayers(Tag.div):
-    def init(self,db,cbedit,cbdelete,cbcolor,cbpart):
+    def init(self,db,cbedit,cbdelete,cbcolor,cbpart,**a):
         for payer in db.payers():
             somme = sum([e.price for e in payer.expenses()])
             bcolor=Tag.div( b.Input(payer.color,item=payer, _type="color",_onchange=lambda o: cbcolor(o.item,o.value) ),  _style="flex: 0 0 60px !important", _title="Change color")
@@ -251,7 +251,7 @@ class ListPayers(Tag.div):
 
 
 class FormExpense(Tag.div):
-    def init(self,db,payer,payer_id,pay=None,title=None,date=None,cbvalid=None,cbdelete=None):
+    def init(self,db,payer,payer_id,pay=None,title=None,date=None,cbvalid=None,cbdelete=None,**a):
         if not date: date = datetime.now()
 
         HDATE = "%Y-%m-%dT%H:%M"
@@ -280,7 +280,7 @@ class FormExpense(Tag.div):
         self <= b.Form(onsubmit=submit) <= ff
 
 class Selector(Tag.div):
-    def init(self,folder,cb):
+    def init(self,folder,cb,**a):
         self.folder=folder
         self.cb=cb
         self._mbox = b.MBox(self)
