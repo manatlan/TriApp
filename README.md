@@ -19,6 +19,8 @@ Build the APK using "Actions > Build Apk > Run workflow", the package.zip(apk) i
 
 <img src="shot1.jpg" width="250"> <img src="shot2.jpg" width="250" > <img src="shot3.jpg" width="250" >
 
+(screenshots don't show the latests version, which is a lot better ;-) )
+
 ## Download
 
-[The APK](https://github.com/manatlan/TriApp/suites/7815955364/artifacts/330111894) (in the zipfile (13.5Mo))
+[The APK](https://github.com/manatlan/TriApp/suites/8010500167/artifacts/343578779) (in the zipfile (13.5Mo))
