@@ -175,7 +175,7 @@ class Fab(Tag.div):
   right: 2rem;
   bottom: 2rem;
 }
-.is-circular { border-radius: 50%;padding:13px !important;}
+.is-circular { border-radius: 50%;padding:18px !important;font-size:20px}
     """
 
     def __init__(self,callback,icon="✚",**a):
@@ -329,6 +329,11 @@ class Selector(Tag.div):
 
         self._mbox.prompt("New Account","",valid)
 
+class Gear(Tag.span):
+    def init(self,**a):
+        self <= "&#9881;"
+        self["style"]="color:white;cursor:pointer;font-size:2em;position:fixed;z-index:10000;top:2px;right:10px"
+
 
 class App(Tag.body):
 
@@ -357,34 +362,48 @@ class App(Tag.body):
 
             self._mbox = b.MBox(self)
 
-            nav = b.Nav(self.title)
-            nav.addEntry("Expenses", self.page_expenses )
-            nav.addEntry("Payers", self.page_payers )
-            nav.addEntry("Close", self.close  )
+            ##-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:
+            #~ self.nav = b.Nav(self.title)
+            #~ self.nav.addEntry("Expenses", self.page_expenses )
+            #~ self.nav.addEntry("Payers", self.page_payers )
+            #~ self.nav.addEntry("Close", self.close  )
+            ##-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:
+            Entry = lambda n,cb: Tag.a(n, _onclick = lambda o: cb(),_style="padding:10px")
+            menus=b.VBox(
+                Entry("Expenses",self.page_expenses),
+                Entry("Payers",self.page_payers),
+            )
+            self.nav= b.NavSide(self.title, menus, "100px")
+            ##-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:
 
             self.main = Tag.div()
 
             # create the layout
-            self += nav
-            self += b.Content( self.main ,_style="padding-top: 60px !important")
+            self += self.nav
+            self += b.Content( self.main)
             self += Fab( self.fab_add )
 
             self.page_expenses()
 
-    def close(self):
+    def select_trip(self,o):
+        self.nav.hide()
         # clear opent db filename
         del self.cfg["current"]
 
         self( self.bind.initialize() )
 
     def page_expenses(self):
+        self.nav.hide()
         self.mode = 1
-        self.title.set( self.db.name+" - [Expenses]" )
+        self.title.set( f'Expenses for "{self.db.name}"' )
+        self.title <= Gear(_onclick=self.select_trip)
         self.redraw()
 
     def page_payers(self):
+        self.nav.hide()
         self.mode = 2
-        self.title.set( self.db.name+" - [Payers]" )
+        self.title.set( f'Payers for "{self.db.name}"' )
+        self.title <= Gear(_onclick=self.select_trip)
         self.redraw()
 
     def redraw(self):
@@ -520,17 +539,11 @@ class App(Tag.body):
         self.redraw()
 
 if __name__=="__main__":
-
-    # from htag.runners import *
-
-    # DevApp( App ).run()
-    # GuyApp( App ).run()
-    # PyWebWiew( App ).run()
-    # BrowserStarletteHTTP( App ).run()
-    # BrowserStarletteWS( App ).run()
-    # BrowserHTTP( App ).run()
-    # WebHTTP( App ).run()
-    # ChromeApp( App ).run()
-
     from htag.runners import AndroidApp
     AndroidApp( App ).run()
+
+#=================================================================================
+# from htag.runners import DevApp as Runner
+# app=Runner(App)
+# if __name__=="__main__":
+#     app.run()
