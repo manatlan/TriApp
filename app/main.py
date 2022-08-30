@@ -372,6 +372,7 @@ class App(Tag.body):
             menus=b.VBox(
                 Entry("Expenses",self.page_expenses),
                 Entry("Payers",self.page_payers),
+                Entry("QUIT",self.exit),
             )
             self.nav= b.NavSide(self.title, menus, "100px")
             ##-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:

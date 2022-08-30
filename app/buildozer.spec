@@ -13,7 +13,7 @@ presplash.filename = %(source.dir)s/triapp.png
 # (str) Icon of the application
 icon.filename = %(source.dir)s/triapp.png
 
-version = 0.2
+version = 0.3
 requirements = python3,kivy,tornado,htbulma,htag,tinydb
 
 orientation = portrait
