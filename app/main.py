@@ -180,7 +180,7 @@ class Fab(Tag.div):
 
     def __init__(self,callback,icon="✚",**a):
         super().__init__(_class="is-fab")
-        self <= Tag.H.span(_class="icon is-large") <= Tag.b(icon, _onclick=callback, _class="button is-circular is-info is-link")
+        self <= Tag.span(_class="icon is-large") <= Tag.b(icon, _onclick=callback, _class="button is-circular is-info is-link")
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 
 
