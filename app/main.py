@@ -265,7 +265,7 @@ class FormExpense(Tag.div):
                 cbvalid(pay, title, payer_id, date)
 
         ff=b.Fields()
-        ff.addField( "Amount", b.Input(pay or "",name="pay",js="tag.focus()",_type="number",_step=0.01,_required=True) )
+        ff.addField( "Amount", b.Input(pay or "",name="pay",js="self.focus()",_type="number",_step=0.01,_required=True) )
         ff.addField( "Title", b.Input(title or "",name="title",_required=True) )
         ff.addField( "Date", b.Input(date.strftime(HDATE),_name="date",_type="datetime-local") )
         if payer:
@@ -391,7 +391,7 @@ class App(Tag.body):
         # clear opent db filename
         del self.cfg["current"]
 
-        self( self.bind.initialize() )
+        self.call.initialize()
 
     def page_expenses(self):
         self.nav.hide()
