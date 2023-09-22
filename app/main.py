@@ -206,6 +206,8 @@ class TagPart(Tag.span):
         self.cb=cb
 
     def render(self):
+        self.clear()
+
         self += Tag.button("<",_onclick=lambda o: self.inc(-1), _class="button is-small",_disabled = self.value == 1,_title="Decrease parts")
         self += Tag.button(self.value, _class="button is-small", _disabled=True)
         self += Tag.button(">",_onclick=lambda o: self.inc(1), _class="button is-small",_title="Increase parts")
