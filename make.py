@@ -1,6 +1,7 @@
 #!/usr/local/bin/python3.7 -u
 import os,sys,subprocess,json,glob
-CWD=os.path.dirname(__file__)
+CWD=os.path.realpath(os.path.dirname(__file__) or os.path.dirname(sys.argv[0]))
+
 DOCKER="mybuildozer"
 
 def read_spec():
@@ -13,18 +14,17 @@ def is_docker_image_exists():
         x={}
     return "ID" in x
 
-def init():
-    assert subprocess.call("which git",shell=True)==0,"install git !"
-    assert subprocess.call("which docker",shell=True)==0,"install docker !"
-    os.system(f"""
+def build(mode="debug"):
+    if not is_docker_image_exists():
+        assert subprocess.call("which git",shell=True)==0,"install git !"
+        assert subprocess.call("which docker",shell=True)==0,"install docker !"
+        os.system(f"""
 cd /tmp
 git clone https://github.com/kivy/buildozer.git
 cd buildozer
 docker build --tag={DOCKER} .
 """)
 
-def build(mode="debug"):
-    assert is_docker_image_exists(),"You should 'init' first !"
     os.system(f"""
 cd {CWD}/app
 mkdir .buildozer
@@ -40,10 +40,14 @@ def install():
 
     apks=glob.glob(f"{CWD}/app/bin/{name}-*.apk")
     if apks:
+        print("install",package,apks[0])
         os.system(f"""
 adb uninstall {package}
 adb install -r -g {apks[0]}
 """)
+        
+        activity="org.kivy.android.PythonActivity"
+        os.system(f"adb shell am start -W -n {package}/{activity}")
     else:
         print("no apk in app/bin ?!")
 
@@ -51,20 +55,37 @@ def clean():
     os.system(f"rm -rf {CWD}/app/bin")
     os.system(f"rm -rf {CWD}/app/.buildozer")
 
+def test():
+    os.system(f"{sys.executable} app/main.py")
+
+def debug():
+    assert subprocess.call("which pidcat",shell=True)==0,"install pidcat !"
+
+    x=read_spec()
+    package=x["package.domain"]+"."+x["package.name"]
+
+    os.system(f"pidcat {package}")
+
+
 if __name__=="__main__":
     assert os.path.isfile(f"{CWD}/app/buildozer.spec"),"wtf?"
-
     _,*args = sys.argv
-    if args==["init"]:
-        init()
-    elif args==["build"]:
+    if args==["build"]:
         build()
     elif args==["install"]:
         install()
+    elif args==["debug"]:
+        debug()
     elif args==["clean"]:
         clean()
+    elif args==["test"]:
+        test()
     else:
-        print("- init: to generate the docker image")
-        print("- build: to build the apk")
-        print("- install: to install the apk in plugged device")
-        print("- clean: delete apks and app/.buildozer")
+        print("USAGE: $./make.py <option>")
+        print("'test/build/install' apk from an htag app")
+        print("Where <option> is:")
+        print(" - test    : test you app locally")
+        print(" - build   : to build the apk")
+        print(" - install : to install/run the apk in plugged device")
+        print(" - debug   : watch log from your app in plugged device")
+        print(" - clean   : delete apks and app/.buildozer")
