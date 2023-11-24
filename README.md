@@ -4,11 +4,9 @@ With python3's [htag](https://github.com/manatlan/htag) module.
 
 <img src="app/triapp.png" width="100" height="100">
 
-~~Android's Apk built thru the [htagapk recipe](https://github.com/manatlan/htagapk)~~
+Android's Apk built thru the [htagapk recipe](https://github.com/manatlan/htagapk)
 
-~~To build the apk, you should use [buildozer docker image](https://github.com/manatlan/maar/blob/main/buildozer_build.md)~~
-
-see [make.py](make.md)
+To build : you can use the **Build github's action** or [make.py](make.md)
 
 ## Features
 
