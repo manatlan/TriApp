@@ -14,7 +14,7 @@ presplash.filename = %(source.dir)s/triapp.png
 icon.filename = %(source.dir)s/triapp.png
 
 version = 0.3
-requirements = python3,kivy,tornado,htbulma,htag>=0.64.0,tinydb
+requirements = Cython==0.29.33,kivy==2.2.0,tornado,htbulma,htag>=0.64.0,tinydb
 
 orientation = portrait
 fullscreen = 0
@@ -27,6 +27,7 @@ android.accept_sdk_license = True
 
 # (str) Filename to the hook for p4a
 p4a.hook = p4a/hook.py
+p4a.branch = release-2022.12.20
 
 # iOS specific
 ios.kivy_ios_url = https://github.com/kivy/kivy-ios
