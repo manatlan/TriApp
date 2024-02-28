@@ -14,7 +14,7 @@ presplash.filename = %(source.dir)s/triapp.png
 icon.filename = %(source.dir)s/triapp.png
 
 version = 0.3
-requirements = Cython==0.29.33,kivy==2.2.0,tornado,htbulma,htag>=0.64.0,tinydb
+requirements = Cython==0.29.33,kivy==2.2.0,tornado,htbulma,htag<0.90.0,tinydb
 
 orientation = portrait
 fullscreen = 0
