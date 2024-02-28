@@ -1,6 +1,6 @@
 # TriApp (tricount android clone)
 
-With python3's [htag](https://github.com/manatlan/htag) module.
+With python3's [htag](https://github.com/manatlan/htag) (< v0.90.0) module.
 
 <img src="app/triapp.png" width="100" height="100">
 
